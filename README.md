@@ -10,8 +10,11 @@ The project requires ROS kinetic and catkin, and it is developed on UBUNTU 16.04
 To install ROS kinetic, please follow the tutorial on: 
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-To install catkin, please follow the tutorial on: 
-http://wiki.ros.org/catkin?distro=indigo#Installing_catkin
+Catkin is normally installed with ROS, If not follow :
+http://wiki.ros.org/catkin
+
+To make a catkin workspace: 
+http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
 ## How to build
 After installing both ROS and initiating your catkin workspace, build the repository using following commands
