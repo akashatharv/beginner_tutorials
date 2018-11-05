@@ -1,0 +1,14 @@
+<launch>
+  <node
+     pkg = "beginner_tutorials"
+     type = "talker"
+     name = "talker_modified"
+     launch-prefix="xterm -e"
+   />
+  <node
+     pkg = "beginner_tutorials"
+     type = "listener"
+     name = "listener_modified"
+     launch-prefix="xterm -e"
+   />
+</launch>
