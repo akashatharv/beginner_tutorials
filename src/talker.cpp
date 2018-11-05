@@ -9,12 +9,24 @@
  */
 
 #include <sstream>
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/customString.h"
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
+
+std::string initialString = "Akash says Go terps!";
+
+bool change(beginner_tutorials::customString::Request &req,
+            beginner_tutorials::customString::Response &res) {
+      initialString = req.input;
+      res.output = initialString;
+      return true;
+}
+
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -52,6 +64,9 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
+
+  auto service = n.advertiseService("customString",change);
+
   auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
   ros::Rate loop_rate(10);
@@ -62,13 +77,13 @@ int main(int argc, char **argv) {
    */
   int count = 0;
   while (ros::ok()) {
-    /**
-     * This is a message object. You stuff it with data, and then publish it.
-     */
+   /**
+    * This is a message object. You stuff it with data, and then publish it.
+    */
     std_msgs::String msg;
-
     std::stringstream ss;
-    ss << "Akash says Go terps! " << count;
+    //ss << "Akash says Go terps! " << count;
+    ss << initialString<<count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
