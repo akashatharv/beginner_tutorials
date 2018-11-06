@@ -69,7 +69,12 @@ int main(int argc, char **argv) {
 
   auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  int frequencyInput;
+  std::string frequency;
+  
+  //n.getParam(frequency,frequencyInput);
+  frequencyInput = atoi(argv[1]);
+  ros::Rate loop_rate(frequencyInput);
 
   /**
    * A count of how many messages we have sent. This is used to create
