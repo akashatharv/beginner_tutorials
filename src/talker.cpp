@@ -15,19 +15,30 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/customString.h"
 
-/**
- * This tutorial demonstrates simple sending of messages over the ROS system.
- */
-
+//Default message which will be sent over the topic "chatter"
 std::string initialString = "Akash says Go terps!";
+
+/**
+ * @brief change function where the custom string is changed using rosservice
+ * @param req New string input by the user using rosservice
+ * @param res Message which was previously sent over the topic "chatter"
+ * @return boolean (typically true if the function works properly)
+ */
 
 bool change(beginner_tutorials::customString::Request &req,
             beginner_tutorials::customString::Response &res) {
-      initialString = req.input;
-      res.output = initialString;
+      initialString = req.input; //input string using rosservice
+      res.output = initialString; //output string of the rosservice call
       ROS_DEBUG_STREAM("Custom String has been changed");
       return true;
 }
+
+/**
+ * @brief Main function where the node "talker" is created and operates
+ * @param argc number of input arguments
+ * @param argv argument for calling main function
+ * @return int (typically 0 if main function works properly)
+ */
 
 int main(int argc, char **argv) {
   /**
@@ -67,21 +78,26 @@ int main(int argc, char **argv) {
    * buffer up before throwing some away.
    */
 
-  auto service = n.advertiseService("customString",change);
-
   auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
+  // service call back function "change" is called for the string change
+  auto service = n.advertiseService("customString",change);
+
   int frequencyInput;
-  std::string frequency;
-  
-  //n.getParam(frequency,frequencyInput);
+  //frequency input by user is read and then set
+
   frequencyInput = atoi(argv[1]);
+
   if(frequencyInput == 0) {
+  //Error logging message stream
         ROS_ERROR_STREAM("Frequency cannot be set to zero, Please enter valid value");
+  //Debug logging message stream
         ROS_DEBUG_STREAM("Default value of frequency is set i.e 10");
+  //Frequency modified as we can't set frequency to be 0
         frequencyInput = 10;
   }
   else if(frequencyInput < 3) {
+  //Warning logging message stream for lower frequency values
         ROS_WARN_STREAM("Frequency value is less than expected, Please verify");
   }
   
@@ -93,6 +109,7 @@ int main(int argc, char **argv) {
    */
   int count = 0;
   if (ros::ok())
+  ///Fatal logging message stream if ROS isn't working properly
         ROS_FATAL_STREAM("ROS isn't running properly, Exiting code");
 
   while (ros::ok()) {
@@ -101,7 +118,6 @@ int main(int argc, char **argv) {
     */
     std_msgs::String msg;
     std::stringstream ss;
-    //ss << "Akash says Go terps! " << count;
     ss << initialString<<count;
     msg.data = ss.str();
 
