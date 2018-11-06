@@ -1,8 +1,10 @@
 <launch>
+    <arg name="frequencyInput" default="10" />
   <node
      pkg = "beginner_tutorials"
      type = "talker"
      name = "talker_modified"
+     args= "$(arg frequencyInput)"
      launch-prefix="xterm -e"
    />
   <node
