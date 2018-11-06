@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include "ros/ros.h"
+#include "ros/console.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/customString.h"
 
@@ -24,6 +25,7 @@ bool change(beginner_tutorials::customString::Request &req,
             beginner_tutorials::customString::Response &res) {
       initialString = req.input;
       res.output = initialString;
+      ROS_DEBUG_STREAM("Custom String has been changed");
       return true;
 }
 
@@ -74,6 +76,15 @@ int main(int argc, char **argv) {
   
   //n.getParam(frequency,frequencyInput);
   frequencyInput = atoi(argv[1]);
+  if(frequencyInput == 0) {
+        ROS_ERROR_STREAM("Frequency cannot be set to zero, Please enter valid value");
+        ROS_DEBUG_STREAM("Default value of frequency is set i.e 10");
+        frequencyInput = 10;
+  }
+  else if(frequencyInput < 3) {
+        ROS_WARN_STREAM("Frequency value is less than expected, Please verify");
+  }
+  
   ros::Rate loop_rate(frequencyInput);
 
   /**
@@ -81,6 +92,9 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
+  if (ros::ok())
+        ROS_FATAL_STREAM("ROS isn't running properly, Exiting code");
+
   while (ros::ok()) {
    /**
     * This is a message object. You stuff it with data, and then publish it.
