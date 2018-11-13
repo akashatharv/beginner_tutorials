@@ -4,6 +4,7 @@
         value="$(find beginner_tutorials)/config/rosconsole_config.config"
   />
     <arg name="frequencyInput" default="10" />
+    <arg name="status" default="false" />
   <node
      pkg = "beginner_tutorials"
      type = "talker"
@@ -16,5 +17,12 @@
      type = "listener"
      name = "listener_modified"
      launch-prefix="xterm -e"
+   />
+  <node
+     pkg = "rosbag"
+     name = "record"
+     type = "record"
+     args = "-a -O result.bag"
+     if = "$(arg status)"
    />
 </launch>
