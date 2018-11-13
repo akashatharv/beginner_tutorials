@@ -140,6 +140,10 @@ int main(int argc, char **argv) {
   // Fatal logging message stream if ROS isn't working properly
         ROS_FATAL_STREAM("ROS isn't running properly, Exiting code");
 
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  
+
   while (ros::ok()) {
    /**
     * This is a message object. You stuff it with data, and then publish it.
@@ -158,6 +162,10 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
+    transform.setOrigin( tf::Vector3(0.0, 2.0, 0.0) );
+    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
+    br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"world","talk"));
 
     ros::spinOnce();
 
