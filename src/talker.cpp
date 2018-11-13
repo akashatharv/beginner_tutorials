@@ -140,8 +140,8 @@ int main(int argc, char **argv) {
   // Fatal logging message stream if ROS isn't working properly
         ROS_FATAL_STREAM("ROS isn't running properly, Exiting code");
 
-  static tf::TransformBroadcaster br;
-  tf::Transform transform;
+  static tf::TransformBroadcaster br; // Declaring the tf broadcaster
+  tf::Transform transform;            // Declaring the frame
   
 
   while (ros::ok()) {
@@ -163,9 +163,9 @@ int main(int argc, char **argv) {
      */
     chatter_pub.publish(msg);
 
-    transform.setOrigin( tf::Vector3(0.0, 2.0, 0.0) );
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
-    br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"world","talk"));
+    transform.setOrigin( tf::Vector3(3.0, 2.0, 1.0) ); // Setting origin of the transform
+    transform.setRotation( tf::Quaternion(0, 0, 0, 1) ); // Setting rotation of the transform
+    br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"world","talk")); // Transform Broadcasted
 
     ros::spinOnce();
 

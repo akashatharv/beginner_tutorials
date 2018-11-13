@@ -39,15 +39,29 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include <ros/ros.h>
 #include "beginner_tutorials/customString.h"
 
+/**
+ * @brief Test to find if the implemented ROS service for changing string works correctly
+ * @param TESTSuite Gtest framework
+ * @param ROS_SERVICE_CUSTOM_STRING_PASSES Test name
+ */
+
 TEST(TestSuite, ROS_SERVICE_CUSTOM_STRING_PASSES) {
-  ros::NodeHandle n;
+  ros::NodeHandle n; //Node Handle Created
   ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
-     "customString");
+     "customString"); //Client created for accesing the service
   beginner_tutorials::customString srv;
-  srv.request.input = "Akash";
+//
+  srv.request.input = "Akash";  //Input test string
   client.call(srv);
-  EXPECT_EQ(srv.response.output,"Akash");
+  EXPECT_EQ(srv.response.output,"Akash"); //Test check
 }
+
+/**
+ * @brief  main function for calling the test
+ * @param  argc number of input arguments
+ * @param  argv character array
+ * @return int (typically 0 if main function works properly)
+ */
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "tester");
