@@ -35,14 +35,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
  * @brief      : ROS publisher created using beginner_tutorials from ROS wiki
  *============================================================================
  */
-
+#include <tf/transform_broadcaster.h>
 #include <sstream>
 #include <string>
 #include "ros/ros.h"
 #include "ros/console.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/customString.h"
-#include <tf/transform_broadcaster.h>
 
 // Default message which will be sent over the topic "chatter"
 extern std::string initialString = "Akash says Go terps!";
@@ -140,9 +139,8 @@ int main(int argc, char **argv) {
   // Fatal logging message stream if ROS isn't working properly
         ROS_FATAL_STREAM("ROS isn't running properly, Exiting code");
 
-  static tf::TransformBroadcaster br; // Declaring the tf broadcaster
-  tf::Transform transform;            // Declaring the frame
-  
+  static tf::TransformBroadcaster br;  //  Declaring the tf broadcaster
+  tf::Transform transform;             //  Declaring the frame
 
   while (ros::ok()) {
    /**
@@ -162,10 +160,12 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
-
-    transform.setOrigin( tf::Vector3(3.0, 2.0, 1.0) ); // Setting origin of the transform
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) ); // Setting rotation of the transform
-    br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"world","talk")); // Transform Broadcasted
+    //  Setting origin of the transform
+    transform.setOrigin(tf::Vector3(3.0, 2.0, 1.0));
+    //  Setting rotation of the transform
+    transform.setRotation(tf::Quaternion(0, 0, 0, 1));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
+    "world", "talk"));  // Transform Broadcasted
 
     ros::spinOnce();
 

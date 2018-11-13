@@ -46,14 +46,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 TEST(TestSuite, ROS_SERVICE_CUSTOM_STRING_PASSES) {
-  ros::NodeHandle n; //Node Handle Created
+  ros::NodeHandle n;  // Node Handle Created
   ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
-     "customString"); //Client created for accesing the service
+     "customString");  // Client created for accesing the service
   beginner_tutorials::customString srv;
 //
-  srv.request.input = "Akash";  //Input test string
+  srv.request.input = "Akash";  // Input test string
   client.call(srv);
-  EXPECT_EQ(srv.response.output,"Akash"); //Test check
+  EXPECT_EQ(srv.response.output, "Akash");  // Test check
 }
 
 /**
