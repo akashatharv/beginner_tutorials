@@ -1,0 +1,20 @@
+<launch>
+  <env
+        name="ROSCONSOLE_CONFIG_FILE"
+        value="$(find beginner_tutorials)/config/rosconsole_config.config"
+  />
+    <arg name="frequencyInput" default="10" />
+  <node
+     pkg = "beginner_tutorials"
+     type = "talker"
+     name = "talker_modified"
+     args= "$(arg frequencyInput)"
+     launch-prefix="xterm -e"
+   />
+  <node
+     pkg = "beginner_tutorials"
+     type = "listener"
+     name = "listener_modified"
+     launch-prefix="xterm -e"
+   />
+</launch>

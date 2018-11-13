@@ -10,13 +10,24 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/customString.h"
 
 /**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
+ * @brief Callback function used for printing the string received
+ * @param msg is the message sent by the talker node of type std_msgs
+ * @return void
  */
+
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 }
+
+/**
+ * @brief Main function where the node "listener" is created and operates
+ * @param argc number of input arguments
+ * @param argv argument for calling main function
+ * @return int (typically 0 if main function works properly)
+ */
 
 int main(int argc, char **argv) {
   /**
