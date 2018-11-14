@@ -38,6 +38,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include "beginner_tutorials/customString.h"
+/**
+ * @brief Test to find if the implemented ROS service for changing string exists
+ * @param TESTSuite Gtest framework
+ * @param ROS_SERVICE_EXISTS Test name
+ */
+TEST(TestSuite, ROS_SERVICE_EXISTS) {
+  ros::NodeHandle n;  // Node Handle Created
+  ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
+     "customString");  // Client created for accesing the service
+  EXPECT_TRUE(client.waitForExistence(ros::Duration(3)));  // Test check
+}
 
 /**
  * @brief Test to find if the implemented ROS service for changing string works correctly
