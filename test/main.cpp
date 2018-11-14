@@ -1,5 +1,5 @@
 /**=============================================================================
- * @file       : test.cpp
+ * @file       : main.cpp
  * @author     : Akash Atharv
  * @version    : 1.0
  * @Copyright  : 3-Clause BSD
@@ -32,27 +32,20 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
 THE POSSIBILITY OF SUCH DAMAGE.
- * @brief      : Gtest implementation for custom ROS beginner-tutorials package 
+ * @brief      : Main file for calling tests
  *=============================================================================
  */
 #include <gtest/gtest.h>
 #include <ros/ros.h>
-#include "beginner_tutorials/customString.h"
-
 /**
- * @brief Test to find if the implemented ROS service for changing string works correctly
- * @param TESTSuite Gtest framework
- * @param ROS_SERVICE_CUSTOM_STRING_PASSES Test name
+ * @brief  main function for calling the test
+ * @param  argc number of input arguments
+ * @param  argv character array
+ * @return int (typically 0 if main function works properly)
  */
 
-TEST(TestSuite, ROS_SERVICE_CUSTOM_STRING_PASSES) {
-  ros::NodeHandle n;  // Node Handle Created
-  ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
-     "customString");  // Client created for accesing the service
-  beginner_tutorials::customString srv;
-//
-  srv.request.input = "Akash";  // Input test string
-  client.call(srv);
-  EXPECT_EQ(srv.response.output, "Akash");  // Test check
+int main(int argc, char **argv) {
+  ros::init(argc, argv, "tester");
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-

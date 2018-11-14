@@ -30,6 +30,6 @@ add_dependencies(listener beginner_tutorials_generate_messages_cpp)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest_gtest(tester launch/test.launch test/test.cpp)
+  add_rostest_gtest(tester launch/test.launch test/main.cpp test/test.cpp)
   target_link_libraries(tester ${catkin_LIBRARIES})
 endif()
