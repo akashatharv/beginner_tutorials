@@ -45,8 +45,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include "std_msgs/String.h"
 #include "beginner_tutorials/customString.h"
 
-class stringAccess { 
-  public:
-  std::string str = "Akash says Go Terps!";
+class stringAccess {
+ public:
+     std::string str = "Akash says Go Terps!";
 };
 #endif /* INCLUDE_TALKER_HPP_ */
