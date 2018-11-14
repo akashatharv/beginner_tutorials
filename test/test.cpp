@@ -45,7 +45,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
  */
 TEST(TestSuite, ROS_SERVICE_EXISTS) {
   ros::NodeHandle n;  // Node Handle Created
-  ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
+  auto client = n.serviceClient<beginner_tutorials::customString>(
      "customString");  // Client created for accesing the service
   EXPECT_TRUE(client.waitForExistence(ros::Duration(3)));  // Test check
 }
@@ -58,7 +58,7 @@ TEST(TestSuite, ROS_SERVICE_EXISTS) {
 
 TEST(TestSuite, ROS_SERVICE_CUSTOM_STRING_PASSES) {
   ros::NodeHandle n;  // Node Handle Created
-  ros::ServiceClient client = n.serviceClient<beginner_tutorials::customString>(
+  auto client = n.serviceClient<beginner_tutorials::customString>(
      "customString");  // Client created for accesing the service
   beginner_tutorials::customString srv;
 //
