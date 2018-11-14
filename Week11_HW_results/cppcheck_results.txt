@@ -1,12 +1,12 @@
 cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" )
 Checking src/listener.cpp...
-1/4 files checked 27% done
+1/4 files checked 26% done
 Checking src/talker.cpp...
-2/4 files checked 71% done
+2/4 files checked 69% done
 Checking test/main.cpp...
-3/4 files checked 84% done
+3/4 files checked 82% done
 Checking test/test.cpp...
 4/4 files checked 100% done
-[test/test.cpp:48]: (style) The function 'TEST' is never used.
+
 
 
