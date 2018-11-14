@@ -158,7 +158,7 @@ int main(int argc, char **argv) {
     //  Setting origin of the transform
     transform.setOrigin(tf::Vector3(3.0, 2.0, 1.0));
     //  Setting rotation of the transform
-    transform.setRotation(tf::Quaternion(0, 0, 0, 1));
+    transform.setRotation(tf::Quaternion(1.5, 2.2, 0, 1));
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
     "world", "talk"));  // Transform Broadcasted
 
