@@ -36,15 +36,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
  *============================================================================
  */
 #include <tf/transform_broadcaster.h>
-#include <sstream>
-#include <string>
-#include "ros/ros.h"
-#include "ros/console.h"
-#include "std_msgs/String.h"
-#include "beginner_tutorials/customString.h"
+#include "talker.hpp"
 
 // Default message which will be sent over the topic "chatter"
-extern std::string initialString = "Akash says Go terps!";
+stringAccess initialString;
 
 /**
  * @brief change function where the custom string is changed using rosservice
@@ -55,8 +50,8 @@ extern std::string initialString = "Akash says Go terps!";
 
 bool change(beginner_tutorials::customString::Request &req,
             beginner_tutorials::customString::Response &res) {
-      initialString = req.input;  // input string using rosservice
-      res.output = initialString;  // output string of the rosservice call
+      initialString.str = req.input;  // input string using rosservice
+      res.output = initialString.str;  // output string of the rosservice call
       ROS_DEBUG_STREAM("Custom String has been changed");
       return true;
 }
@@ -148,7 +143,7 @@ int main(int argc, char **argv) {
     */
     std_msgs::String msg;
     std::stringstream ss;
-    ss << initialString<< count;
+    ss << initialString.str<< count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
