@@ -99,7 +99,7 @@ evince frames.pdf
 
 which will provide a similar output to the picture below:
 <p align="center">
-  <img width="460" height="800" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/rqt_tf_tree_and_tf_echo_output.jpg">
+  <img width="800" height="400" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/rqt_tf_tree_and_tf_echo_output.jpg">
 </p>
 Additionaly we can also visualize the frames using "rviz" by using
 ```
@@ -116,7 +116,7 @@ catkin_make run_tests
 ```
 The output should be similar to the picture below
 <p align="center">
-  <img width="460" height="800" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/test_successful.jpg">
+  <img width="800" height="400" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/test_successful.jpg">
 </p>
 
 ## Using rosbag 
