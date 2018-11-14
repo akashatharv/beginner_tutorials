@@ -3,7 +3,8 @@
 ---
 
 This is an advanced implementation of ROS beginner tutorials [ROS tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29)
-Here, a ROS service /customString and a launch file have been created to change the custom string and launch both nodes together respectively
+Here, a ROS service /customString and a launch file have been created to change the custom string and launch both nodes together respectively. Additionally a [tf frame](http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf) 
+is also broadcasted. Level2 integration test and rosbag recording for all topics is also implemented
 
 ## Pre-requisites
 The project requires ROS kinetic and catkin, and it is developed on UBUNTU 16.04 LTS.
@@ -30,7 +31,7 @@ source devel/setup.bash
 Now clone the repository's branch Week_10HW into your catkin workspace
 ```
 cd ~/catkin_ws/src/
-git clone -b Week10_HW https://github.com/akashatharv/beginner_tutorials
+git clone -b Week11_HW https://github.com/akashatharv/beginner_tutorials
 cd ..
 catkin_make
 ```
@@ -61,7 +62,7 @@ Open a new termincal and type the following commands
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-roslaunch beginner_tutorials string.launch frequencyInput:=<interger frequency value>
+roslaunch beginner_tutorials string.launch frequencyInput:=<integer frequency value>
 ```
 Press ctrl+C in the main window to terminate the execution
 
@@ -82,4 +83,68 @@ rosrun rqt_console rqt_console
 ```
 Make sure that all the nodes are running before you use the above command for proper visualization
 
+## ROSTF
 
+In addition to previous Week's implementation of the talker node a new ROS tf implementation is added to repository. Here, the talker node broadcasts tf transforms to "\talk" with respect to the "\world" frame. The tf frame can be visualized while the talker node and roscore are running using "tf_echo" in a separate terminal
+
+```
+rosrun tf tf_echo /world /talk
+```
+and also using "view frames" in a separate terminal
+
+```
+rosrun tf view_frames
+evince frames.pdf
+```
+
+which will provide a similar output to the picture below:
+<p align="center">
+  <img width="460" height="800" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/rqt_tf_tree_and_tf_echo_output.jpg">
+</p>
+Additionaly we can also visualize the frames using "rviz" by using
+```
+rosrun rviz rviz
+```
+in a separate terminal and selecting the world frame.
+
+## Running rostest
+
+level 2 integration tests are created to test the Talker node using gtest framework.To run the tests run the following commands
+```
+cd ~/catkin_ws/
+catkin_make run_tests
+```
+The output should be similar to the picture below
+<p align="center">
+  <img width="460" height="800" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/test_successful.jpg">
+</p>
+
+## Using rosbag 
+
+Rosbag is used to record messages published over any ROS topic. You can launch the nodes as described previously and simply use
+```
+rosbag record -a
+```
+in another terminal to record data from all the topics or modify the command to record a specific topic.
+Additionally to use the launch file in the repository open a new terminal and type,
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch beginner_tutorials string.launch status:=true
+```
+Status is a flag which is false by default. It can be set to true as shown in commands above to record messages over all topics in a bag file
+Press ctrl+C in the active window to terminate the execution
+The resultant bag file can be found in the .ros directory.
+To get details regarding the newly created bag file type
+```
+cd ~/.ros
+rosbag info result.bag
+```
+To visualize the data recorded on the screen, first run roscore and listener node, then navigate to the above directory in a different terminal
+```
+cd ~/.ros
+```
+and use rosbag play 
+```
+rosbag play result.bag
+```
