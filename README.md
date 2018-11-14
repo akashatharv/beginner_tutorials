@@ -102,9 +102,11 @@ which will provide a similar output to the picture below:
   <img width="800" height="400" src="https://github.com/akashatharv/beginner_tutorials/blob/Week11_HW/Week11_HW_results/rqt_tf_tree_and_tf_echo_output.jpg">
 </p>
 Additionaly we can also visualize the frames using "rviz" by using
+
 ```
 rosrun rviz rviz
 ```
+
 in a separate terminal and selecting the world frame.
 
 ## Running rostest
