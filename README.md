@@ -134,7 +134,8 @@ cd ~/catkin_ws/
 source devel/setup.bash
 roslaunch beginner_tutorials string.launch status:=true
 ```
-Status is a flag which is false by default. It can be set to true as shown in commands above to record messages over all topics in a bag file
+Status is a flag which is false by default which means that rosbag recording is disabled. It can be set to true as shown in commands above to record messages over all topics in a bag file.
+
 Press ctrl+C in the active window to terminate the execution
 The resultant bag file can be found in the .ros directory.
 To get details regarding the newly created bag file type
